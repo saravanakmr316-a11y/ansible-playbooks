@@ -1,0 +1,19 @@
+- hosts: all
+  become: yes
+  remote_user: ec2-user
+
+  tasks:
+    - name: Install Apache web
+      yum:
+        name: httpd
+        state: installed
+
+    - name: start Apache web
+      service:
+        name: httpd
+        state: started
+
+    - name: Copying index html
+      copy:
+        src: /etc/ansible/index.html
+        dest: /var/www/html
